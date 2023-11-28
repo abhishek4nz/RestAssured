@@ -16,3 +16,7 @@ G.idea/sonarlint/issuestore/a/5/a5cc2925ca8258af241be7e5b0381edf30266302,e\d\ed
 Q.idea/sonarlint/securityhotspotstore/a/5/a5cc2925ca8258af241be7e5b0381edf30266302,3\0\30205a209c6ce77c4cfc19a09e6f57c588b7fb88
 w
 G.idea/sonarlint/issuestore/4/4/442292b8a7efeabbe4cc176709b833b1792140ec,8\6\863e0292fd7e9b3e74dafd6cc01f73ba76346482
+P
+ src/main/java/Files/Payload.java,8\b\8b40c43f4dff7dcacf50f82d82826f15dc846ba5
+Z
+*src/main/java/org/RestAssured/Basics2.java,3\1\3115d019865a0a4b7f47c3a8ad1ad18d3efdf64c
