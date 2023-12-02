@@ -1,0 +1,141 @@
+Index: src/main/java/org/RestAssured/Basics2.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package org.RestAssured;\r\n\r\nimport Files.Payload;\r\nimport io.restassured.RestAssured;\r\n\r\nimport static io.restassured.RestAssured.given;\r\n\r\npublic class Basics2 {\r\n    public static void main(String[] args) {\r\n\r\n        RestAssured.baseURI = \"https://rahulshettyacademy.com/\";        //SET BASE URL\r\n\r\n        //given - all input fields\r\n        //when - submit the api (Resource, HTTP methods)\r\n        //then - validate the response\r\n\r\n        given().log().all().queryParam(\"key\", \"qaclick123\").header(\"Content-Type\", \"application/json\")\r\n                .body(Payload.add()).when().post(\"/maps/api/place/add/json\")        //SUBMIT HTTP REQUEST\r\n                .then().log().all().assertThat().statusCode(200);       //VALIDATE THAT STATUS CODE IS 200\r\n\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/org/RestAssured/Basics2.java b/src/main/java/org/RestAssured/Basics2.java
+--- a/src/main/java/org/RestAssured/Basics2.java	(revision aa229764dd1155424e95d79a7ec1b4a53c87dbcc)
++++ b/src/main/java/org/RestAssured/Basics2.java	(date 1701530951122)
+@@ -1,9 +1,11 @@
+ package org.RestAssured;
+ 
+-import Files.Payload;
+ import io.restassured.RestAssured;
++import io.restassured.path.json.JsonPath;
+ 
++import static Files.Payload.add;
+ import static io.restassured.RestAssured.given;
++import static org.hamcrest.Matchers.equalTo;
+ 
+ public class Basics2 {
+     public static void main(String[] args) {
+@@ -14,9 +16,26 @@
+         //when - submit the api (Resource, HTTP methods)
+         //then - validate the response
+ 
+-        given().log().all().queryParam("key", "qaclick123").header("Content-Type", "application/json")
+-                .body(Payload.add()).when().post("/maps/api/place/add/json")        //SUBMIT HTTP REQUEST
+-                .then().log().all().assertThat().statusCode(200);       //VALIDATE THAT STATUS CODE IS 200
++       String response = given().log().all().queryParam("key", "qaclick123").header("Content-Type", "application/json")
++                .body(add())                //ADD PAYLOAD FROM A SEPARATE CLASS
++                .when().post("/maps/api/place/add/json")        //SUBMIT HTTP REQUEST
++                .then().log().all().assertThat().statusCode(200)       //VALIDATE THAT STATUS CODE IS 200
++                .body("scope", equalTo("APP"))              //MATCHING JSON RESPONSE WITH HAMCREST MATCHERS
++                .header("Server","Apache/2.4.52 (Ubuntu)")     //MATCHING HEADER IN RESPONSE
++                .extract().response().asString();               //EXTRACT JSON RESPONSE AND STORE IT IN A STRING
++
++        System.out.println(response);
++
++        JsonPath js = new JsonPath(response);       //FOR PARSING JSON STORED AS A STRING
++        String placeId = js.getString("place_id");      //EXTRACTING PLACE ID AND STORING IT IN A STRING
++        System.out.println(placeId);        //PRINTING THE PLACE ID
++
++        //ADD PLACE
++        //UPDATE PLACE WITH NEW ADDRESS
++        //GET PLACE TO VALIDATE IF NEW ADDRESS IS PRESENT OR NOT
++
++
++
+ 
+     }
+ }
+Index: src/main/java/Files/Payload.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package Files;\r\n\r\npublic class Payload {\r\n\r\n    public static String add() {\r\n        return \"{\\\\n\\\" +\\n\" +\r\n                \"                        \\\"    \\\\\\\"location\\\\\\\": {\\\\n\\\" +\\n\" +\r\n                \"                        \\\"        \\\\\\\"lat\\\\\\\": -38.383494,\\\\n\\\" +\\n\" +\r\n                \"                        \\\"        \\\\\\\"lng\\\\\\\": 33.427362\\\\n\\\" +\\n\" +\r\n                \"                        \\\"    },\\\\n\\\" +\\n\" +\r\n                \"                        \\\"    \\\\\\\"accuracy\\\\\\\": 50,\\\\n\\\" +\\n\" +\r\n                \"                        \\\"    \\\\\\\"name\\\\\\\": \\\\\\\"Frontline house\\\\\\\",\\\\n\\\" +\\n\" +\r\n                \"                        \\\"    \\\\\\\"phone_number\\\\\\\": \\\\\\\"(+91) 983 893 3937\\\\\\\",\\\\n\\\" +\\n\" +\r\n                \"                        \\\"    \\\\\\\"address\\\\\\\": \\\\\\\"29, side layout, cohen 09\\\\\\\",\\\\n\\\" +\\n\" +\r\n                \"                        \\\"    \\\\\\\"types\\\\\\\": [\\\\n\\\" +\\n\" +\r\n                \"                        \\\"        \\\\\\\"shoe park\\\\\\\",\\\\n\\\" +\\n\" +\r\n                \"                        \\\"        \\\\\\\"shop\\\\\\\"\\\\n\\\" +\\n\" +\r\n                \"                        \\\"    ],\\\\n\\\" +\\n\" +\r\n                \"                        \\\"    \\\\\\\"website\\\\\\\": \\\\\\\"http://google.com\\\\\\\",\\\\n\\\" +\\n\" +\r\n                \"                        \\\"    \\\\\\\"language\\\\\\\": \\\\\\\"French-IN\\\\\\\"\\\\n\\\" +\\n\" +\r\n                \"                        \\\"}\";\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/Files/Payload.java b/src/main/java/Files/Payload.java
+--- a/src/main/java/Files/Payload.java	(revision aa229764dd1155424e95d79a7ec1b4a53c87dbcc)
++++ b/src/main/java/Files/Payload.java	(date 1701529981323)
+@@ -3,21 +3,21 @@
+ public class Payload {
+ 
+     public static String add() {
+-        return "{\\n\" +\n" +
+-                "                        \"    \\\"location\\\": {\\n\" +\n" +
+-                "                        \"        \\\"lat\\\": -38.383494,\\n\" +\n" +
+-                "                        \"        \\\"lng\\\": 33.427362\\n\" +\n" +
+-                "                        \"    },\\n\" +\n" +
+-                "                        \"    \\\"accuracy\\\": 50,\\n\" +\n" +
+-                "                        \"    \\\"name\\\": \\\"Frontline house\\\",\\n\" +\n" +
+-                "                        \"    \\\"phone_number\\\": \\\"(+91) 983 893 3937\\\",\\n\" +\n" +
+-                "                        \"    \\\"address\\\": \\\"29, side layout, cohen 09\\\",\\n\" +\n" +
+-                "                        \"    \\\"types\\\": [\\n\" +\n" +
+-                "                        \"        \\\"shoe park\\\",\\n\" +\n" +
+-                "                        \"        \\\"shop\\\"\\n\" +\n" +
+-                "                        \"    ],\\n\" +\n" +
+-                "                        \"    \\\"website\\\": \\\"http://google.com\\\",\\n\" +\n" +
+-                "                        \"    \\\"language\\\": \\\"French-IN\\\"\\n\" +\n" +
+-                "                        \"}";
++        return "{\n" +
++                "    \"location\": {\n" +
++                "        \"lat\": -38.383494,\n" +
++                "        \"lng\": 33.427362\n" +
++                "    },\n" +
++                "    \"accuracy\": 50,\n" +
++                "    \"name\": \"Frontline house\",\n" +
++                "    \"phone_number\": \"(+91) 983 893 3937\",\n" +
++                "    \"address\": \"29, side layout, cohen 09\",\n" +
++                "    \"types\": [\n" +
++                "        \"shoe park\",\n" +
++                "        \"shop\"\n" +
++                "    ],\n" +
++                "    \"website\": \"http://google.com\",\n" +
++                "    \"language\": \"French-IN\"\n" +
++                "}";
+     }
+ }
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"bb9b9818-6207-4055-b953-e68f6206e02e\" name=\"Changes\" comment=\"My first API test on Google Place ADD API\">\r\n      <change afterPath=\"$PROJECT_DIR$/src/main/java/Files/Payload.java\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/src/main/java/org/RestAssured/Basics2.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/index.pb\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/index.pb\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"Class\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"ProjectColorInfo\">{\r\n  &quot;associatedIndex&quot;: 0\r\n}</component>\r\n  <component name=\"ProjectId\" id=\"2YfgmMyS8SOvWsii0IPc1OJW8M6\" />\r\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\">\r\n    <ConfirmationsSetting value=\"2\" id=\"Add\" />\r\n  </component>\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\">{\r\n  &quot;keyToString&quot;: {\r\n    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,\r\n    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,\r\n    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,\r\n    &quot;SONARLINT_PRECOMMIT_ANALYSIS&quot;: &quot;true&quot;,\r\n    &quot;git-widget-placeholder&quot;: &quot;master&quot;,\r\n    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,\r\n    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;\r\n  }\r\n}</component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"bb9b9818-6207-4055-b953-e68f6206e02e\" name=\"Changes\" comment=\"\" />\r\n      <created>1700922209003</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1700922209003</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00001\" summary=\"My first API test on Google Place ADD API\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1701008096517</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1701008096517</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00002\" summary=\"My first API test on Google Place ADD API\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1701008158769</created>\r\n      <option name=\"number\" value=\"00002\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1701008158769</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"3\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <option name=\"ADD_EXTERNAL_FILES_SILENTLY\" value=\"true\" />\r\n    <MESSAGE value=\"My first API test on Google Place ADD API\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"My first API test on Google Place ADD API\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision aa229764dd1155424e95d79a7ec1b4a53c87dbcc)
++++ b/.idea/workspace.xml	(date 1701492214674)
+@@ -5,11 +5,9 @@
+   </component>
+   <component name="ChangeListManager">
+     <list default="true" id="bb9b9818-6207-4055-b953-e68f6206e02e" name="Changes" comment="My first API test on Google Place ADD API">
+-      <change afterPath="$PROJECT_DIR$/src/main/java/Files/Payload.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/src/main/java/org/RestAssured/Basics2.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/index.pb" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/java/Files/Payload.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Files/Payload.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/java/org/RestAssured/Basics2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/RestAssured/Basics2.java" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -81,4 +79,14 @@
+     <MESSAGE value="My first API test on Google Place ADD API" />
+     <option name="LAST_COMMIT_MESSAGE" value="My first API test on Google Place ADD API" />
+   </component>
++  <component name="XDebuggerManager">
++    <breakpoint-manager>
++      <breakpoints>
++        <breakpoint enabled="true" type="java-exception">
++          <properties class="java.lang.IllegalArgumentException" package="java.lang" />
++          <option name="timeStamp" value="1" />
++        </breakpoint>
++      </breakpoints>
++    </breakpoint-manager>
++  </component>
+ </project>
+\ No newline at end of file

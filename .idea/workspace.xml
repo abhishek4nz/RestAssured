@@ -5,11 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bb9b9818-6207-4055-b953-e68f6206e02e" name="Changes" comment="My first API test on Google Place ADD API">
-      <change afterPath="$PROJECT_DIR$/src/main/java/Files/Payload.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/RestAssured/Basics2.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/index.pb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Files/Payload.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Files/Payload.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/RestAssured/Basics2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/RestAssured/Basics2.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -80,5 +78,15 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="My first API test on Google Place ADD API" />
     <option name="LAST_COMMIT_MESSAGE" value="My first API test on Google Place ADD API" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.lang.IllegalArgumentException" package="java.lang" />
+          <option name="timeStamp" value="1" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
