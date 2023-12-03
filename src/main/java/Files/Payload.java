@@ -1,5 +1,7 @@
 package Files;
 
+import io.restassured.path.json.JsonPath;
+
 public class Payload {
 
     public static String add() {
@@ -19,5 +21,17 @@ public class Payload {
                 "    \"website\": \"http://google.com\",\n" +
                 "    \"language\": \"French-IN\"\n" +
                 "}";
+    }
+public static String update(String placeId)   {
+        return "{\n" +
+                "    \"place_id\": \""+placeId+"\",\n" +
+                "    \"address\": \"70 Summer walk, USA\",\n" +
+                "    \"key\": \"qaclick123\"\n" +
+                "}";
+
+        }
+    public static String jsonPath(String response, String path)  {
+        JsonPath js = new JsonPath(response);
+        return js.getString(path);
     }
 }
