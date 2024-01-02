@@ -1,7 +1,6 @@
 package org.RestAssured;
 
 import io.restassured.RestAssured;
-import io.restassured.path.json.JsonPath;
 import org.testng.Assert;
 
 import static Files.Payload.*;
@@ -52,7 +51,7 @@ public class Basics2 {
                 .then().log().all().assertThat().statusCode(200)        //HAMCREST ASSERTION
                 .extract().asString();
 
-       String newAddress = jsonPath(getResponse,"address");
+       String newAddress = jsonPath(getResponse,"address");         //FETCH ADDRESS VALUE FROM JSON STRING
         System.out.println(newAddress);
 
         //USING TEST NG ASSERTION

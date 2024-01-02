@@ -22,15 +22,17 @@ public class Payload {
                 "    \"language\": \"French-IN\"\n" +
                 "}";
     }
-public static String update(String placeId)   {
+
+    public static String update(String placeId) {
         return "{\n" +
-                "    \"place_id\": \""+placeId+"\",\n" +
+                "    \"place_id\": \"" + placeId + "\",\n" +
                 "    \"address\": \"70 Summer walk, USA\",\n" +
                 "    \"key\": \"qaclick123\"\n" +
                 "}";
 
-        }
-    public static String jsonPath(String response, String path)  {
+    }
+
+    public static String jsonPath(String response, String path) {
         JsonPath js = new JsonPath(response);
         return js.getString(path);
     }

@@ -1,13 +1,11 @@
 
 m
-java:S1192"KDefine a constant instead of duplicating this literal "qaclick123" 3 times.(àï¿×úÿÿÿÿ8íÌ¶õÂ1
+java:S1192"KDefine a constant instead of duplicating this literal "qaclick123" 3 times.(àï¿×úÿÿÿÿ8íÌ¶õÂ1
 ]
-java:S1854";Remove this useless assignment to local variable "address".(ßÍ¹æûÿÿÿÿ8üÌ¶õÂ1
+java:S1854";Remove this useless assignment to local variable "address".(ßÍ¹æûÿÿÿÿ8üÌ¶õÂ1
 N
-java:S1481",Remove this unused "address" local variable.(ßÍ¹æûÿÿÿÿ8şÌ¶õÂ1
-L	java:S106"+Replace this use of System.out by a logger.(˜Š¿Ûüÿÿÿÿ8€Í¶õÂ1
-X	java:S125 "<This block of commented-out lines of code should be removed.(áı½é8€Í¶õÂ1
-G	java:S106#"+Replace this use of System.out by a logger.(¢±•Õ8Í¶õÂ1
-G	java:S1068"+Replace this use of System.out by a logger.(Í¢8„Í¶õÂ1
-`
-java:S1128">Remove this unused import 'io.restassured.path.json.JsonPath'.(¥ñàøÿÿÿÿ8„Í¶õÂ1
+java:S1481",Remove this unused "address" local variable.(ßÍ¹æûÿÿÿÿ8şÌ¶õÂ1
+L	java:S106"+Replace this use of System.out by a logger.(˜Š¿Ûüÿÿÿÿ8€Í¶õÂ1
+X	java:S125"<This block of commented-out lines of code should be removed.(áı½é8€Í¶õÂ1
+G	java:S106""+Replace this use of System.out by a logger.(¢±•Õ8Í¶õÂ1
+G	java:S1067"+Replace this use of System.out by a logger.(Í¢8„Í¶õÂ1
